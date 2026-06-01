@@ -17,9 +17,3 @@
 - **Cloud**: Google Drive API
 - **Frontend**: HTML5, CSS3, JavaScript
 
-### Installation
-
-#### 1. Clone Repository
-```bash
-git clone <repository-url>
-cd secure-cloud-file-sharing
