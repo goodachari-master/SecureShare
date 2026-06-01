@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - SecureShare</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔐 SecureShare</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/upload.html">Upload</a>
+            <a href="/my-files.html">My Files</a>
+            <a href="/keys.html">Keys</a>
+            <a href="/recipients.html" class="active">Users</a>
+            <div class="nav-user">
+                <span id="navUsername">Loading...</span>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+        <div class="notification-container">
+            <button class="notification-bell" id="notificationBell">🔔<span class="badge" id="notifCount">0</span></button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Registered Users</h1>
+            <p>These users can receive encrypted files from you</p>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" id="searchUsers" placeholder="Search users...">
+        </div>
+        
+        <div class="users-grid" id="usersList">
+            <div class="loading">Loading users...</div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/recipients.js"></script>
+</body>
+</html>

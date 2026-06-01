@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SecureShare</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔐 SecureShare</div>
+        <div class="nav-links">
+            <a href="/dashboard.html" class="active">Dashboard</a>
+            <a href="/upload.html">Upload</a>
+            <a href="/my-files.html">My Files</a>
+            <a href="/keys.html">Keys</a>
+            <div class="nav-user">
+                <span id="navUsername">Loading...</span>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+        <div class="notification-container">
+            <button class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge" id="notifCount">0</span>
+            </button>
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                    <h4>Notifications</h4>
+                    <button id="markAllRead" class="btn-link">Mark all read</button>
+                </div>
+                <div class="notification-list" id="notificationList">
+                    <div class="notification-empty">No notifications</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome back, <span id="username">User</span>!</h1>
+            <p>Your secure file sharing dashboard</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card" onclick="location.href='/my-files.html?tab=received'">
+                <div class="stat-icon">📥</div>
+                <div class="stat-info">
+                    <h3 id="receivedCount">0</h3>
+                    <p>Files Shared With Me</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="location.href='/my-files.html?tab=sent'">
+                <div class="stat-icon">📤</div>
+                <div class="stat-info">
+                    <h3 id="sentCount">0</h3>
+                    <p>Files I Shared</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="location.href='/my-files.html?tab=unread'">
+                <div class="stat-icon">🆕</div>
+                <div class="stat-info">
+                    <h3 id="unreadCount">0</h3>
+                    <p>Unread Files</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="document.getElementById('notificationBell').click()">
+                <div class="stat-icon">🔔</div>
+                <div class="stat-info">
+                    <h3 id="notifStatCount">0</h3>
+                    <p>Notifications</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <div class="action-card" onclick="location.href='/upload.html'">
+                    <div class="action-icon">📁</div>
+                    <h3>Upload File</h3>
+                    <p>Encrypt and share securely</p>
+                </div>
+                <div class="action-card" onclick="location.href='/my-files.html?tab=received'">
+                    <div class="action-icon">📂</div>
+                    <h3>View Received Files</h3>
+                    <p>Access files shared with you</p>
+                </div>
+                <div class="action-card" onclick="location.href='/keys.html'">
+                    <div class="action-icon">🔑</div>
+                    <h3>Manage Keys</h3>
+                    <p>View your encryption keys</p>
+                </div>
+                <div class="action-card" onclick="location.href='/recipients.html'">
+                    <div class="action-icon">👥</div>
+                    <h3>View Users</h3>
+                    <p>See all registered users</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <div class="activity-list" id="activityList">
+                <div class="activity-empty">No recent activity</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

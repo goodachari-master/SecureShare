@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File - SecureShare</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔐 SecureShare</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/upload.html" class="active">Upload</a>
+            <a href="/my-files.html">My Files</a>
+            <a href="/keys.html">Keys</a>
+            <div class="nav-user">
+                <span id="navUsername">Loading...</span>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+        <div class="notification-container">
+            <button class="notification-bell" id="notificationBell">🔔<span class="badge" id="notifCount">0</span></button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Secure File Upload</h1>
+            <p>Your file will be encrypted with AES-256-GCM and the key with recipient's RSA public key</p>
+        </div>
+        
+        <div class="upload-container">
+            <div class="upload-card">
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-zone-icon">📁</div>
+                    <p>Drag & drop your file here</p>
+                    <p class="drop-zone-sub">or click to browse</p>
+                    <input type="file" id="fileInput" style="display: none">
+                </div>
+                
+                <div class="selected-file" id="selectedFile" style="display: none">
+                    <span>📄 <span id="fileName"></span></span>
+                    <button id="clearFile" class="btn-icon">✖</button>
+                </div>
+                
+                <div class="form-group">
+                    <label>Folder Name</label>
+                    <input type="text" id="folderName" placeholder="e.g., ProjectDocs, Invoice2024" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Recipient</label>
+                    <select id="recipientSelect" required>
+                        <option value="">-- Select a user --</option>
+                    </select>
+                </div>
+                
+                <div class="encryption-info">
+                    <h4>Encryption Details</h4>
+                    <div class="info-row">
+                        <span>Algorithm:</span>
+                        <span>AES-256-GCM + RSA-4096-OAEP</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Key Size:</span>
+                        <span>256-bit (AES) | 4096-bit (RSA)</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Integrity:</span>
+                        <span>GCM Authentication Tag</span>
+                    </div>
+                </div>
+                
+                <button id="uploadBtn" class="btn-primary btn-block" disabled>Encrypt & Upload</button>
+                
+                <div class="progress-container" id="progressContainer" style="display: none">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Encrypting...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/upload.js"></script>
+</body>
+</html>

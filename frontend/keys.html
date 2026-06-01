@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management - SecureShare</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔐 SecureShare</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/upload.html">Upload</a>
+            <a href="/my-files.html">My Files</a>
+            <a href="/keys.html" class="active">Keys</a>
+            <div class="nav-user">
+                <span id="navUsername">Loading...</span>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+        <div class="notification-container">
+            <button class="notification-bell" id="notificationBell">🔔<span class="badge" id="notifCount">0</span></button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Cryptographic Identity</h1>
+            <p>Your RSA-4096 key pair information</p>
+        </div>
+        
+        <div class="keys-container">
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-icon">🔓</div>
+                    <h3>Public Key</h3>
+                    <span class="key-badge">Shared with everyone</span>
+                </div>
+                <div class="key-content">
+                    <div class="key-info">
+                        <div class="info-row">
+                            <span>Algorithm:</span>
+                            <span>RSA-4096</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Padding:</span>
+                            <span>OAEP with SHA-256</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Fingerprint:</span>
+                            <code id="fingerprint">Loading...</code>
+                        </div>
+                    </div>
+                    <div class="key-preview" id="publicKeyPreview">
+                        <pre>-----BEGIN PUBLIC KEY-----</pre>
+                    </div>
+                    <div class="key-actions">
+                        <button id="copyPublicKey" class="btn-secondary">📋 Copy Public Key</button>
+                        <button id="downloadPublicKey" class="btn-secondary">💾 Download Public Key</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-card">
+                <div class="key-header">
+                    <div class="key-icon">🔒</div>
+                    <h3>Private Key</h3>
+                    <span class="key-badge warning">Keep this secure!</span>
+                </div>
+                <div class="key-content">
+                    <div class="key-info">
+                        <div class="info-row">
+                            <span>Status:</span>
+                            <span>Stored encrypted in database</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Decrypted:</span>
+                            <span>Only in active session</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Warning:</span>
+                            <span>Never share your private key</span>
+                        </div>
+                    </div>
+                    <div class="key-actions">
+                        <button id="viewPrivateKey" class="btn-secondary">👁️ View Private Key</button>
+                        <button id="downloadPrivateKey" class="btn-secondary">💾 Download Private Key</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h4>🔐 How Keys Are Used</h4>
+                <ul>
+                    <li>Your <strong>Public Key</strong> is stored in MySQL and shared with others to encrypt files for you</li>
+                    <li>Your <strong>Private Key</strong> is encrypted with your password and stored in MySQL</li>
+                    <li>When you login, your private key is decrypted and stored temporarily in your session</li>
+                    <li>Your private key is used to decrypt files shared with you</li>
+                    <li>Your private key is NEVER exposed to other users</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Password Prompt Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePasswordModal">&times;</span>
+            <h3>Re-enter Password</h3>
+            <p>For your security, please enter your password to view your private key.</p>
+            <div class="form-group">
+                <label for="privateKeyPassword">Password:</label>
+                <input type="password" id="privateKeyPassword" class="form-control" placeholder="Enter your password">
+            </div>
+            <div class="modal-actions">
+                <button id="confirmPasswordBtn" class="btn-primary">Verify Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Private Key Modal -->
+    <div id="privateKeyModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" id="closePrivateKeyModal">&times;</span>
+            <h3>Your Private Key</h3>
+            <div class="warning-box">
+                ⚠️ Never share your private key with anyone!
+            </div>
+            <pre id="privateKeyContent" class="key-pre">Loading...</pre>
+            <div class="modal-actions">
+                <button id="copyPrivateKey" class="btn-primary">Copy to Clipboard</button>
+                <button id="downloadPrivateKeyAction" class="btn-secondary">Download Key File</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/keys.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract File - SecureShare</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🔐 SecureShare</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/upload.html">Upload</a>
+            <a href="/my-files.html" class="active">My Files</a>
+            <a href="/keys.html">Keys</a>
+            <a href="#" id="logoutBtn">Logout</a>
+        </div>
+        <div class="notification-container">
+            <button class="notification-bell" id="notificationBell">🔔<span class="badge" id="notifCount">0</span></button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Extract File</h1>
+            <p>Select a file to decrypt using your private key</p>
+        </div>
+        
+        <div class="extract-container">
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All Files</button>
+                <button class="filter-btn" data-filter="unread">Unread</button>
+                <button class="filter-btn" data-filter="read">Read</button>
+            </div>
+            
+            <div class="files-list" id="filesList">
+                <div class="loading">Loading files...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Extract Modal -->
+    <div id="extractModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Extract File</h3>
+            <p id="extractFileName"></p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="extractProgressFill"></div>
+            </div>
+            <p id="extractStatus">Preparing to decrypt...</p>
+            <button id="confirmExtractBtn" class="btn-primary">Extract & Download</button>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="/js/api.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/extract.js"></script>
+</body>
+</html>
